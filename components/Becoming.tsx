@@ -1,23 +1,18 @@
-"use client";
-
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { useRef } from "react";
 import type { Copy } from "@/content/copy";
 import { Reveal, SectionLabel } from "./ui";
 
-/* Botschaften-Slider: die Kartenreihe wandert scroll-gekoppelt von links nach rechts */
+/**
+ * Botschaften-Slider: die Kartenreihe läuft dauerhaft von rechts nach links.
+ * Die Reihe wird verdoppelt, damit der Umlauf nahtlos ist — der Abstand sitzt
+ * als Rand an jeder Karte statt als gap, sonst stimmt die Hälfte nicht exakt.
+ */
 export function Becoming({ t }: { t: Copy }) {
-  const ref = useRef<HTMLElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const x = useTransform(scrollYProgress, [0, 1], ["-22%", "2%"]);
+  const cards = t.becoming.cards;
+  const track = [...cards, ...cards];
 
   return (
-    <section ref={ref} className="section-night overflow-hidden">
+    <section className="section-night overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 pt-24 md:pt-32">
         <Reveal>
           <SectionLabel tone="dark">{t.becoming.label}</SectionLabel>
@@ -34,19 +29,18 @@ export function Becoming({ t }: { t: Copy }) {
         </Reveal>
       </div>
 
-      <div className="pb-24 pt-14 md:pb-32">
-        <motion.div
-          style={reduce ? undefined : { x }}
-          className="flex w-max gap-5 pl-5 will-change-transform"
-        >
-          {t.becoming.cards.map((c) => (
+      <div className="marquee-viewport relative overflow-hidden pb-24 pt-14 md:pb-32">
+        <div className="marquee-track flex w-max">
+          {track.map((c, i) => (
             <figure
-              key={c.label}
-              className="group relative h-[22rem] w-[16rem] shrink-0 overflow-hidden rounded-2xl border border-white/10 sm:h-[24rem] sm:w-[18rem]"
+              key={`${c.label}-${i}`}
+              /* Die zweite Hälfte ist nur die optische Kopie */
+              aria-hidden={i >= cards.length}
+              className="group relative mr-5 h-[22rem] w-[16rem] shrink-0 overflow-hidden rounded-2xl border border-white/10 sm:h-[24rem] sm:w-[18rem]"
             >
               <Image
                 src={c.img}
-                alt={c.label}
+                alt={i >= cards.length ? "" : c.label}
                 fill
                 sizes="(max-width: 640px) 256px, 288px"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
@@ -60,7 +54,7 @@ export function Becoming({ t }: { t: Copy }) {
               </figcaption>
             </figure>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

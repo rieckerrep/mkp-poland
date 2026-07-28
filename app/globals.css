@@ -16,6 +16,7 @@
   --color-forest: #10b981;
 
   --animate-shimmer: shimmer 4s ease-in-out infinite;
+  --animate-marquee: marquee 45s linear infinite;
 
   @keyframes shimmer {
     0% {
@@ -24,6 +25,17 @@
     60%,
     100% {
       transform: translateX(250%) skewX(-12deg);
+    }
+  }
+
+  /* Genau eine Kartenreihe weit — die zweite Reihe ist die Kopie,
+     dadurch springt der Übergang nicht. */
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
     }
   }
 }
@@ -156,6 +168,15 @@ body {
   transform: translateY(-2px);
 }
 
+/* Endlos laufende Kartenreihe */
+.marquee-track {
+  animation: var(--animate-marquee);
+  will-change: transform;
+}
+.marquee-viewport:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -163,5 +184,13 @@ body {
   .btn-gold::after {
     animation: none;
     display: none;
+  }
+  /* Statt zu laufen wird die Reihe von Hand scrollbar,
+     damit keine Karte unerreichbar bleibt. */
+  .marquee-track {
+    animation: none;
+  }
+  .marquee-viewport {
+    overflow-x: auto;
   }
 }
