@@ -168,13 +168,10 @@ body {
   transform: translateY(-2px);
 }
 
-/* Endlos laufende Kartenreihe */
+/* Endlos laufende Kartenreihe — läuft ohne Unterbrechung durch */
 .marquee-track {
   animation: var(--animate-marquee);
   will-change: transform;
-}
-.marquee-viewport:hover .marquee-track {
-  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
