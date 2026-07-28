@@ -227,6 +227,16 @@ The site is prepared for classic search **and** generative engines.
 2. Ergebnis mit dem [Rich Results Test](https://search.google.com/test/rich-results) prüfen (Event und FAQ).
 3. Prüfen, dass `https://<domain>/robots.txt` **nicht** `Disallow: /` zeigt — sonst steht `NEXT_PUBLIC_SITE_URL` oder die Umgebung falsch.
 
+### Fehlersuche: Startseite zeigt 404, Bilder laden aber
+
+Symptom: `/llms.txt` und `/images/…` funktionieren, aber `/`, `/de` und `/robots.txt` liefern
+`404: NOT_FOUND`. Ursache: Das Vercel-Projekt wurde ohne Framework-Preset angelegt („Other").
+Dann läuft zwar `next build`, ausgeliefert wird aber nur der Ordner `public/`.
+
+Die mitgelieferte `vercel.json` setzt `"framework": "nextjs"` und behebt das. Falls es
+weiterhin auftritt, in Vercel unter **Settings → Build & Deployment** prüfen, dass
+*Framework Preset* auf **Next.js** steht und *Output Directory* **nicht** überschrieben ist.
+
 ---
 
 ## Projektstruktur / Struktura / Structure
