@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+
+  --color-night-950: #0b1120;
+  --color-night-900: #111827;
+  --color-night-800: #172554;
+  --color-paper: #f8fafc;
+  --color-ink: #1e293b;
+  --color-slate-mid: #475569;
+  --color-slate-soft: #94a3b8;
+  --color-line: #e2e8f0;
+  --color-gold: #f59e0b;
+  --color-ember: #d97706;
+  --color-forest: #10b981;
+
+  --animate-shimmer: shimmer 4s ease-in-out infinite;
+
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-150%) skewX(-12deg);
+    }
+    60%,
+    100% {
+      transform: translateX(250%) skewX(-12deg);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dunkle Sektionen: der Navy-Verlauf als tragende Fläche */
+.section-night {
+  background: linear-gradient(160deg, #111827 0%, #0f1b3d 55%, #172554 100%);
+  color: #e2e8f0;
+}
+
+/* Label-Typo: Versalien, gesperrt */
+.label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Karte C — Akzentkante oben (Standardkarte) */
+.card-edge {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px rgb(15 23 42 / 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-edge::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--edge, #172554);
+  transition: height 0.3s ease;
+}
+.card-edge:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 2px 4px rgb(15 23 42 / 0.05), 0 16px 40px rgb(15 23 42 / 0.1);
+}
+.card-edge:hover::before {
+  height: 6px;
+}
+
+/* Karte auf dunklem Grund */
+.card-night {
+  background: rgb(255 255 255 / 0.04);
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+.card-night:hover {
+  transform: translateY(-3px);
+  border-color: rgb(245 158 11 / 0.35);
+  background: rgb(255 255 255 / 0.06);
+}
+
+/* Goldener Shimmer-CTA — nur für die Initiation / den primären Schritt */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  padding: 0.9rem 1.75rem;
+  font-weight: 600;
+  color: #0b1120;
+  background: linear-gradient(90deg, #facc15, #f59e0b, #ea580c);
+  box-shadow: 0 10px 30px rgb(245 158 11 / 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgb(245 158 11 / 0.4);
+}
+.btn-gold::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent);
+  animation: var(--animate-shimmer);
+}
+
+/* Ruhiger Sekundär-CTA */
+.btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  padding: 0.9rem 1.75rem;
+  font-weight: 600;
+  border: 1px solid rgb(255 255 255 / 0.25);
+  color: #e2e8f0;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.btn-quiet:hover {
+  border-color: rgb(255 255 255 / 0.5);
+  background: rgb(255 255 255 / 0.06);
+  transform: translateY(-2px);
+}
+
+.btn-quiet-light {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  padding: 0.9rem 1.75rem;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  color: #1e293b;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+}
+.btn-quiet-light:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .btn-gold::after {
+    animation: none;
+    display: none;
+  }
+}
