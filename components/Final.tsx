@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import type { Copy } from "@/content/copy";
 import { Reveal } from "./ui";
 
@@ -9,11 +10,12 @@ export function Final({ t }: { t: Copy }) {
     <section id="kontakt" className="section-night relative scroll-mt-16 overflow-hidden">
       {/* Hintergrund: Vater mit Kind am Meer, stark abgedunkelt */}
       <div aria-hidden className="absolute inset-0">
-        <img
+        <Image
           src="/images/stolz.jpg"
           alt=""
-          loading="lazy"
-          className="h-full w-full object-cover opacity-20"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#131f42] via-transparent to-night-950/80" />
       </div>

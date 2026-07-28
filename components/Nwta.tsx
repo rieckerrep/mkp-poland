@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, CalendarDays, Globe, MapPin, Users } from "lucide-react";
+import Image from "next/image";
 import type { Copy } from "@/content/copy";
 import { Reveal, SectionLabel } from "./ui";
 
@@ -43,12 +44,15 @@ export function Nwta({ t }: { t: Copy }) {
           {/* Fakten-Karte */}
           <Reveal delay={0.15}>
             <div className="card-night overflow-hidden">
-              <img
-                src="/images/maenner-in-aktion.jpg"
-                alt=""
-                loading="lazy"
-                className="h-48 w-full object-cover"
-              />
+              <div className="relative h-48 w-full">
+                <Image
+                  src="/images/maenner-in-aktion.jpg"
+                  alt=""
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 400px"
+                  className="object-cover"
+                />
+              </div>
               <ul className="space-y-6 p-8">
                 {t.nwta.facts.map((f, i) => {
                   const Icon = factIcons[i % factIcons.length];

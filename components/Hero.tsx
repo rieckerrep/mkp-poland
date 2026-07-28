@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, CalendarDays, ChevronDown, MapPin } from "lucide-react";
+import Image from "next/image";
 import type { Copy, Locale } from "@/content/copy";
 import { Counter } from "./ui";
 
@@ -26,10 +27,13 @@ export function Hero({ t, locale }: { t: Copy; locale: Locale }) {
     <section id="top" className="section-night relative overflow-hidden">
       {/* Hintergrundbild, stark abgedunkelt unter dem Navy-Verlauf */}
       <div aria-hidden className="absolute inset-0">
-        <img
+        <Image
           src="/images/einsamkeit.jpg"
           alt=""
-          className="h-full w-full object-cover opacity-25"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-25"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-night-900/60 via-transparent to-[#131f42]" />
       </div>

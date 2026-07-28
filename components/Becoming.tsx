@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 import type { Copy } from "@/content/copy";
 import { Reveal, SectionLabel } from "./ui";
@@ -43,11 +44,12 @@ export function Becoming({ t }: { t: Copy }) {
               key={c.label}
               className="group relative h-[22rem] w-[16rem] shrink-0 overflow-hidden rounded-2xl border border-white/10 sm:h-[24rem] sm:w-[18rem]"
             >
-              <img
+              <Image
                 src={c.img}
                 alt={c.label}
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                fill
+                sizes="(max-width: 640px) 256px, 288px"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-night-950/85 via-night-950/20 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-5">

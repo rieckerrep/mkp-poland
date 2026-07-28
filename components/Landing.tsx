@@ -9,13 +9,11 @@ import { Nwta } from "./Nwta";
 import { Faq } from "./Faq";
 import { Final } from "./Final";
 import { Footer } from "./Footer";
-import { SetLang } from "./SetLang";
 
 export function Landing({ locale }: { locale: Locale }) {
   const t = copy[locale];
   return (
     <>
-      <SetLang locale={locale} />
       <Nav t={t} locale={locale} />
       <main>
         <Hero t={t} locale={locale} />

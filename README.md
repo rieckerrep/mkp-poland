@@ -53,6 +53,20 @@ pnpm build   # baut die statische Seite
 pnpm start   # startet den Produktionsserver auf Port 3100
 ```
 
+### Auf Vercel veröffentlichen
+
+1. Auf [vercel.com](https://vercel.com) mit dem GitHub-Konto anmelden.
+2. **Add New → Project** und das Repository `rieckerrep/mkp-poland` importieren.
+3. Framework-Erkennung, Build-Befehl und Ausgabeverzeichnis unverändert lassen — Vercel erkennt Next.js und pnpm automatisch.
+4. Unter **Environment Variables** eintragen:
+   | Name | Wert |
+   |---|---|
+   | `NEXT_PUBLIC_SITE_URL` | die spätere Live-Adresse, z. B. `https://www.mkp-polska.pl` |
+5. **Deploy** klicken.
+6. Eigene Domain unter **Settings → Domains** hinzufügen. Danach `NEXT_PUBLIC_SITE_URL` auf genau diese Domain setzen und einmal neu deployen.
+
+> **Wichtig:** Indexiert wird nur die Produktionsumgebung. Preview-Deployments bleiben automatisch auf `noindex`, damit sie nicht mit der Live-Seite konkurrieren.
+
 ### Texte ändern
 
 Alle Texte aller fünf Sprachen liegen in **einer** Datei: `content/copy.ts`. Ändern, speichern — der Dev-Server lädt automatisch neu.
@@ -103,6 +117,20 @@ Alle Texte aller fünf Sprachen liegen in **einer** Datei: `content/copy.ts`. Ä
 pnpm build   # buduje stronę statyczną
 pnpm start   # uruchamia serwer produkcyjny na porcie 3100
 ```
+
+### Publikacja na Vercel
+
+1. Zaloguj się na [vercel.com](https://vercel.com) kontem GitHub.
+2. **Add New → Project** i zaimportuj repozytorium `rieckerrep/mkp-poland`.
+3. Zostaw domyślne ustawienia — Vercel sam wykryje Next.js i pnpm.
+4. W **Environment Variables** dodaj:
+   | Nazwa | Wartość |
+   |---|---|
+   | `NEXT_PUBLIC_SITE_URL` | docelowy adres, np. `https://www.mkp-polska.pl` |
+5. Kliknij **Deploy**.
+6. Dodaj własną domenę w **Settings → Domains**. Następnie ustaw `NEXT_PUBLIC_SITE_URL` na tę domenę i wdróż ponownie.
+
+> **Ważne:** Indeksowana jest tylko produkcja. Wdrożenia podglądowe (preview) automatycznie mają `noindex`.
 
 ### Edycja tekstów
 
@@ -155,23 +183,66 @@ pnpm build   # builds the static site
 pnpm start   # starts the production server on port 3100
 ```
 
+### Deploy to Vercel
+
+1. Sign in at [vercel.com](https://vercel.com) with the GitHub account.
+2. **Add New → Project** and import the `rieckerrep/mkp-poland` repository.
+3. Leave the detected settings as they are — Vercel recognises Next.js and pnpm.
+4. Under **Environment Variables** add:
+   | Name | Value |
+   |---|---|
+   | `NEXT_PUBLIC_SITE_URL` | the final public address, e.g. `https://www.mkp-polska.pl` |
+5. Click **Deploy**.
+6. Add the custom domain under **Settings → Domains**, then set `NEXT_PUBLIC_SITE_URL` to that exact domain and redeploy once.
+
+> **Important:** Only the production environment is indexed. Preview deployments stay on `noindex` automatically.
+
 ### Editing content
 
 All copy for all five languages lives in **one** file: `content/copy.ts`. Edit, save — the dev server reloads automatically.
 
 ---
 
+## SEO & GEO
+
+Die Seite ist für klassische Suche **und** für generative Suchmaschinen vorbereitet.
+Strona jest przygotowana pod klasyczne wyszukiwarki **i** wyszukiwarki generatywne.
+The site is prepared for classic search **and** generative engines.
+
+| Baustein | Umsetzung |
+|---|---|
+| `<html lang>` | serverseitig pro Sprache — jede Sprache hat eine eigene Route-Group |
+| Canonical + hreflang | alle fünf Sprachen plus `x-default`, gegenseitig verlinkt |
+| `sitemap.xml` | automatisch generiert, mit `xhtml:link`-Alternativen je Sprache |
+| `robots.txt` | Produktion offen, Preview gesperrt; KI-Crawler ausdrücklich erlaubt |
+| JSON-LD (`@graph`) | `NGO`, `WebSite`, `WebPage`, `Event` (NWTA), `Service`, `FAQPage` — pro Sprache übersetzt |
+| `llms.txt` | Faktenblatt unter `/llms.txt` für generative Engines |
+| Open Graph / Twitter | `og.jpg` (1200×630), Titel und Beschreibung je Sprache |
+| Bilder | `next/image` mit AVIF/WebP, Hero mit `priority` |
+| Sicherheits-Header | HSTS, `nosniff`, Referrer-Policy, Permissions-Policy |
+
+### Nach dem ersten Deploy zu erledigen
+
+1. Domain in der [Google Search Console](https://search.google.com/search-console) verifizieren und `sitemap.xml` einreichen.
+2. Ergebnis mit dem [Rich Results Test](https://search.google.com/test/rich-results) prüfen (Event und FAQ).
+3. Prüfen, dass `https://<domain>/robots.txt` **nicht** `Disallow: /` zeigt — sonst steht `NEXT_PUBLIC_SITE_URL` oder die Umgebung falsch.
+
+---
+
 ## Projektstruktur / Struktura / Structure
 
 ```
-app/            Routen pro Sprache (/, /en, /de, /cs, /uk) + Layout + globals.css
-components/     Sektionen: Hero, Problem, Circles, Becoming (Slider), Path, Nwta, Faq, Final
+app/            Eine Route-Group je Sprache ((pl), (en), (de), (cs), (uk))
+                + robots.ts, sitemap.ts, icon.svg, globals.css
+components/     Sektionen: Hero, Problem, Circles, Becoming (Slider), Path,
+                Nwta, Faq, Final + JsonLd, RootShell
 content/        copy.ts — alle Texte in 5 Sprachen + Locale-Liste
-public/images/  Optimierte Fotos (JPEG, max. 1800 px)
+lib/            seo.ts (Domain, Indexierung, Keywords), metadata.ts
+public/         images/, og.jpg, llms.txt
 ```
 
 ## Hinweise / Uwagi / Notes
 
-- `robots: noindex` ist im Root-Layout gesetzt — vor dem Livegang entfernen. / Usunąć przed startem produkcyjnym. / Remove before going live.
-- NWTA: 2.–4. Oktober 2026, Kiczyce — Daten in `content/copy.ts`.
-- Anmeldung aktuell per `mailto:` — später durch Formular ersetzbar.
+- NWTA: 2.–4. Oktober 2026, Kiczyce — Daten in `content/copy.ts` und `lib/seo.ts`.
+- Anmeldung aktuell per `mailto:` — später durch ein Formular ersetzbar.
+- `.env.example` zeigt alle verfügbaren Umgebungsvariablen.

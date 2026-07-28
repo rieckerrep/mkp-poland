@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarDays, ListChecks, Lock, Users } from "lucide-react";
+import Image from "next/image";
 import type { Copy } from "@/content/copy";
 import { Reveal, SectionLabel } from "./ui";
 
@@ -58,12 +59,15 @@ export function Circles({ t }: { t: Copy }) {
                 {t.circles.cta}
               </a>
             </div>
-            <img
-              src="/images/empathie.jpg"
-              alt=""
-              loading="lazy"
-              className="h-56 w-full object-cover md:h-full"
-            />
+            <div className="relative h-56 w-full md:h-auto">
+              <Image
+                src="/images/empathie.jpg"
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                className="object-cover"
+              />
+            </div>
           </div>
         </Reveal>
       </div>

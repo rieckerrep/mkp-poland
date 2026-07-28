@@ -1,0 +1,53 @@
+# The ManKind Project Polska (MKP Polska)
+
+> Independent nonprofit running peer-led men's circles and the NWTA initiation
+> training for men in Poland. Part of The ManKind Project, founded 1985, active
+> in 27 countries, with more than 70,000 men having completed the NWTA.
+
+The website is published in five languages. Content is identical across them.
+
+- [Polski (default)](/): Męskie kręgi i trening inicjacyjny NWTA
+- [English](/en): Men's circles and the NWTA initiation training
+- [Deutsch](/de): Männerkreise und das Initiationstraining NWTA
+- [Čeština](/cs): Mužské kruhy a iniciační trénink NWTA
+- [Українська](/uk): Чоловічі кола та ініціаційний тренінг NWTA
+
+## What the organization offers
+
+- **Men's circles (I-Groups)**: closed, peer-facilitated groups meeting weekly
+  with a fixed structure. Core rule is "No Fixing" — members listen without
+  giving advice. What is said in the circle stays in the circle. No fee is
+  charged for participation in a circle.
+- **New Warrior Training Adventure (NWTA)**: a 48-hour weekend initiation
+  training modelled on the classic hero's journey. It is an experience, not a
+  lecture or a motivational workshop.
+- **Integration**: after the training, men return to a circle where the
+  experience becomes daily practice — honesty, accountability, integrity.
+
+## Next NWTA training
+
+- Dates: 2–4 October 2026
+- Location: Kiczyce, Cieszyn Silesia, Poland
+- Led by: Thomas Filler and an international MKP staff
+- Language: English, with translators on site
+
+## Facts
+
+- The ManKind Project was founded in 1985 in Milwaukee, Wisconsin.
+- More than 70,000 men have completed the NWTA.
+- The organization is active in 27 countries and is a nonprofit.
+- Mission: "We believe that emotionally mature, powerful, compassionate, and
+  purpose-driven men will help heal some of our society's deepest wounds."
+- MKP is not a religious or political organization, and circles do not replace
+  therapy or medical treatment.
+
+## Contact
+
+- Marek, MKP Polska, Kraków
+- Email: marek@mkp-polska.pl
+- Phone: +48 784 601 018
+
+## Structured data
+
+Every page carries JSON-LD (`@graph`) describing the organization, the website,
+the page, the NWTA event, the men's circles service, and the FAQ.

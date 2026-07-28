@@ -1,7 +1,11 @@
 "use client";
 
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+
+/* useLayoutEffect warnt beim Server-Rendering — auf dem Server nichts tun */
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /* Scroll-Reveal: animiert einmal beim Eintritt, reduced-motion zeigt sofort den Endzustand */
 export function Reveal({
@@ -64,7 +68,15 @@ export function Counter({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : 0);
+
+  /* Der Endwert steht bereits im server-gerenderten HTML — sonst lesen
+     Crawler und Textextraktoren eine 0 statt der echten Zahl. */
+  const [display, setDisplay] = useState(value);
+
+  /* Erst auf dem Client, vor dem ersten Paint, auf den Startwert zurücksetzen */
+  useIsomorphicLayoutEffect(() => {
+    if (!reduce) setDisplay(0);
+  }, [reduce]);
 
   useEffect(() => {
     if (!inView) return;
