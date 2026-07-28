@@ -25,6 +25,7 @@ export const copy = {
       lead: "Męskie kręgi i trening inicjacyjny NWTA. Miejsce, w którym mężczyźni mówią prawdę o swoim życiu — i słuchają siebie nawzajem. Bez oceniania. Bez naprawiania.",
       primary: "Trening NWTA · październik 2026",
       secondary: "Poznaj męskie kręgi",
+      event: "2–4 października 2026 · Kiczyce, Śląsk Cieszyński",
       scroll: "Przewiń",
     },
     stats: [
@@ -200,6 +201,7 @@ export const copy = {
       lead: "Men's circles and the NWTA initiation training. A place where men tell the truth about their lives — and truly listen to each other. No judging. No fixing.",
       primary: "NWTA Training · October 2026",
       secondary: "Explore men's circles",
+      event: "October 2–4, 2026 · Kiczyce, Cieszyn Silesia, Poland",
       scroll: "Scroll",
     },
     stats: [
@@ -375,6 +377,7 @@ export const copy = {
       lead: "Männerkreise und das Initiationstraining NWTA. Ein Ort, an dem Männer die Wahrheit über ihr Leben aussprechen — und einander wirklich zuhören. Ohne Bewertung. Ohne Ratschläge.",
       primary: "NWTA-Training · Oktober 2026",
       secondary: "Männerkreise kennenlernen",
+      event: "2.–4. Oktober 2026 · Kiczyce, Teschener Schlesien (Polen)",
       scroll: "Scrollen",
     },
     stats: [
@@ -550,6 +553,7 @@ export const copy = {
       lead: "Mužské kruhy a iniciační trénink NWTA. Místo, kde muži říkají pravdu o svém životě — a skutečně si naslouchají. Bez hodnocení. Bez oprav.",
       primary: "Trénink NWTA · říjen 2026",
       secondary: "Poznej mužské kruhy",
+      event: "2.–4. října 2026 · Kiczyce, Těšínské Slezsko (Polsko)",
       scroll: "Posunout",
     },
     stats: [
@@ -725,6 +729,7 @@ export const copy = {
       lead: "Чоловічі кола та ініціаційний тренінг NWTA. Місце, де чоловіки говорять правду про своє життя — і по-справжньому слухають одне одного. Без оцінок. Без порад.",
       primary: "Тренінг NWTA · жовтень 2026",
       secondary: "Дізнатися про чоловічі кола",
+      event: "2–4 жовтня 2026 · Кічице, Тешинська Сілезія (Польща)",
       scroll: "Гортай",
     },
     stats: [

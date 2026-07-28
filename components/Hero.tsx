@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, CalendarDays, ChevronDown, MapPin } from "lucide-react";
 import type { Copy, Locale } from "@/content/copy";
 import { Counter } from "./ui";
 
@@ -84,6 +84,21 @@ export function Hero({ t, locale }: { t: Copy; locale: Locale }) {
             {t.hero.secondary}
           </a>
         </motion.div>
+
+        {/* Termin und Ort direkt unter dem Trainings-CTA */}
+        <motion.p
+          {...fade(0.55)}
+          className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-300"
+        >
+          <span className="inline-flex items-center gap-1.5">
+            <CalendarDays className="h-4 w-4 text-amber-400" />
+            {t.hero.event.split(" · ")[0]}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <MapPin className="h-4 w-4 text-amber-400" />
+            {t.hero.event.split(" · ").slice(1).join(" · ")}
+          </span>
+        </motion.p>
 
         {/* Zahlenband */}
         <motion.div
