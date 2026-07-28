@@ -42,8 +42,14 @@ export function Nwta({ t }: { t: Copy }) {
 
           {/* Fakten-Karte */}
           <Reveal delay={0.15}>
-            <div className="card-night p-8">
-              <ul className="space-y-6">
+            <div className="card-night overflow-hidden">
+              <img
+                src="/images/maenner-in-aktion.jpg"
+                alt=""
+                loading="lazy"
+                className="h-48 w-full object-cover"
+              />
+              <ul className="space-y-6 p-8">
                 {t.nwta.facts.map((f, i) => {
                   const Icon = factIcons[i % factIcons.length];
                   return (

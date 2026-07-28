@@ -43,19 +43,27 @@ export function Circles({ t }: { t: Copy }) {
         {/* No-Fixing-Prinzip als eigenes, ruhiges Statement */}
         <Reveal delay={0.1}>
           <div
-            className="card-edge mt-14 p-8 md:p-12"
+            className="card-edge mt-14 grid overflow-hidden md:grid-cols-[1.3fr_1fr]"
             style={{ "--edge": "linear-gradient(90deg,#facc15,#f59e0b,#ea580c)" } as React.CSSProperties}
           >
-            <p className="label text-ember">{t.circles.noFixing.label}</p>
-            <h3 className="mt-3 text-[clamp(1.6rem,3vw,2.5rem)] font-bold tracking-tight text-night-900">
-              {t.circles.noFixing.title}
-            </h3>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-mid">
-              {t.circles.noFixing.text}
-            </p>
-            <a href="#kontakt" className="btn-quiet-light mt-8">
-              {t.circles.cta}
-            </a>
+            <div className="p-8 md:p-12">
+              <p className="label text-ember">{t.circles.noFixing.label}</p>
+              <h3 className="mt-3 text-[clamp(1.6rem,3vw,2.5rem)] font-bold tracking-tight text-night-900">
+                {t.circles.noFixing.title}
+              </h3>
+              <p className="mt-4 max-w-3xl text-lg leading-relaxed text-slate-mid">
+                {t.circles.noFixing.text}
+              </p>
+              <a href="#kontakt" className="btn-quiet-light mt-8">
+                {t.circles.cta}
+              </a>
+            </div>
+            <img
+              src="/images/empathie.jpg"
+              alt=""
+              loading="lazy"
+              className="h-56 w-full object-cover md:h-full"
+            />
           </div>
         </Reveal>
       </div>

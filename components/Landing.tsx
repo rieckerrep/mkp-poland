@@ -3,6 +3,7 @@ import { Nav } from "./Nav";
 import { Hero } from "./Hero";
 import { Problem } from "./Problem";
 import { Circles } from "./Circles";
+import { Becoming } from "./Becoming";
 import { Path } from "./Path";
 import { Nwta } from "./Nwta";
 import { Faq } from "./Faq";
@@ -18,6 +19,7 @@ export function Landing({ locale }: { locale: Locale }) {
         <Hero t={t} locale={locale} />
         <Problem t={t} />
         <Circles t={t} />
+        <Becoming t={t} />
         <Path t={t} />
         <Nwta t={t} />
         <Faq t={t} />

@@ -6,8 +6,19 @@ import { Reveal } from "./ui";
 
 export function Final({ t }: { t: Copy }) {
   return (
-    <section id="kontakt" className="section-night scroll-mt-16">
-      <div className="mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
+    <section id="kontakt" className="section-night relative scroll-mt-16 overflow-hidden">
+      {/* Hintergrund: Vater mit Kind am Meer, stark abgedunkelt */}
+      <div aria-hidden className="absolute inset-0">
+        <img
+          src="/images/stolz.jpg"
+          alt=""
+          loading="lazy"
+          className="h-full w-full object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#131f42] via-transparent to-night-950/80" />
+      </div>
+
+      <div className="relative mx-auto max-w-4xl px-5 py-24 text-center md:py-32">
         <Reveal>
           <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] font-bold leading-tight tracking-tight text-white">
             {t.final.h2a}

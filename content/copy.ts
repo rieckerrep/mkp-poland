@@ -82,6 +82,19 @@ export const copy = {
       },
       cta: "Napisz i dołącz do kręgu",
     },
+    becoming: {
+      label: "Po co ta praca",
+      h2a: "Nie robisz tego tylko dla siebie.",
+      h2b: "Robisz to dla ludzi, którzy cię potrzebują.",
+      lead: "Kiedy ty rośniesz, rośnie wszystko wokół ciebie. Twoje relacje. Twój dom. Twoja praca.",
+      cards: [
+        { img: "/images/vater.jpg", label: "Lepszy ojciec" },
+        { img: "/images/herz-mit-sonne.jpg", label: "Lepszy partner" },
+        { img: "/images/gruppe-von-maennern.jpg", label: "Lepszy brat" },
+        { img: "/images/erziehung.jpg", label: "Lepszy syn" },
+        { img: "/images/business-und-beruf.jpg", label: "Lepszy lider" },
+      ],
+    },
     path: {
       label: "Droga w MKP",
       h2: "Trzy kroki. Każdy w swoim tempie.",
@@ -246,6 +259,19 @@ export const copy = {
         text: "In a circle, no one interrupts you with good advice. When you speak, you have the group's full attention — no lecturing, no comparing, no \"if I were you\". It turns out that changes everything.",
       },
       cta: "Write us and join a circle",
+    },
+    becoming: {
+      label: "What this work is for",
+      h2a: "You don't do this only for yourself.",
+      h2b: "You do it for the people who need you.",
+      lead: "When you grow, everything around you grows. Your relationships. Your home. Your work.",
+      cards: [
+        { img: "/images/vater.jpg", label: "A better father" },
+        { img: "/images/herz-mit-sonne.jpg", label: "A better partner" },
+        { img: "/images/gruppe-von-maennern.jpg", label: "A better brother" },
+        { img: "/images/erziehung.jpg", label: "A better son" },
+        { img: "/images/business-und-beruf.jpg", label: "A better leader" },
+      ],
     },
     path: {
       label: "The path in MKP",
