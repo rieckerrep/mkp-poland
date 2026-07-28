@@ -5,6 +5,14 @@ import { ArrowRight, ChevronDown } from "lucide-react";
 import type { Copy, Locale } from "@/content/copy";
 import { Counter } from "./ui";
 
+const localeTags: Record<Locale, string> = {
+  pl: "pl-PL",
+  en: "en-US",
+  de: "de-DE",
+  cs: "cs-CZ",
+  uk: "uk-UA",
+};
+
 export function Hero({ t, locale }: { t: Copy; locale: Locale }) {
   const reduce = useReducedMotion();
 
@@ -89,7 +97,7 @@ export function Hero({ t, locale }: { t: Copy; locale: Locale }) {
                   value={s.value}
                   prefix={s.prefix}
                   suffix={s.suffix}
-                  locale={locale === "pl" ? "pl-PL" : "en-US"}
+                  locale={localeTags[locale]}
                 />
               </p>
               <p className="mt-1 text-sm text-slate-400">{s.label}</p>

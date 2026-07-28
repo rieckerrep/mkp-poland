@@ -1,15 +1,33 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
+import { Check, ChevronDown, Globe } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import type { Copy } from "@/content/copy";
+import { useEffect, useRef, useState } from "react";
+import { locales, type Copy, type Locale } from "@/content/copy";
 
-export function Nav({ t }: { t: Copy }) {
+export function Nav({ t, locale }: { t: Copy; locale: Locale }) {
   const { scrollY } = useScroll();
   const [solid, setSolid] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const langRef = useRef<HTMLDivElement>(null);
 
   useMotionValueEvent(scrollY, "change", (v) => setSolid(v > 40));
+
+  /* Dropdown schließt bei Klick außerhalb */
+  useEffect(() => {
+    if (!langOpen) return;
+    const onDown = (e: PointerEvent) => {
+      if (!langRef.current?.contains(e.target as Node)) setLangOpen(false);
+    };
+    document.addEventListener("pointerdown", onDown);
+    return () => document.removeEventListener("pointerdown", onDown);
+  }, [langOpen]);
 
   const links = [
     { href: "#kregi", label: t.nav.circles },
@@ -48,12 +66,56 @@ export function Nav({ t }: { t: Copy }) {
         </div>
 
         <div className="flex items-center gap-3">
-          <Link
-            href={t.otherLocaleHref}
-            className="rounded-lg border border-white/20 px-2.5 py-1 text-xs font-semibold text-slate-200 transition-colors hover:border-white/50 hover:text-white"
-          >
-            {t.otherLocaleLabel}
-          </Link>
+          {/* Sprach-Dropdown */}
+          <div ref={langRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setLangOpen((o) => !o)}
+              aria-expanded={langOpen}
+              aria-haspopup="listbox"
+              className="flex items-center gap-1.5 rounded-lg border border-white/20 px-2.5 py-1.5 text-xs font-semibold text-slate-200 transition-colors hover:border-white/50 hover:text-white"
+            >
+              <Globe className="h-3.5 w-3.5" />
+              {locale.toUpperCase()}
+              <motion.span animate={{ rotate: langOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown className="h-3.5 w-3.5" />
+              </motion.span>
+            </button>
+
+            <AnimatePresence>
+              {langOpen && (
+                <motion.ul
+                  role="listbox"
+                  initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                  className="absolute right-0 top-full mt-2 w-44 overflow-hidden rounded-xl border border-white/10 bg-night-950/95 py-1.5 shadow-xl backdrop-blur-md"
+                >
+                  {locales.map((l) => {
+                    const active = l.code === locale;
+                    return (
+                      <li key={l.code} role="option" aria-selected={active}>
+                        <Link
+                          href={l.href}
+                          onClick={() => setLangOpen(false)}
+                          className={`flex items-center justify-between px-4 py-2 text-sm transition-colors ${
+                            active
+                              ? "font-semibold text-amber-400"
+                              : "text-slate-300 hover:bg-white/5 hover:text-white"
+                          }`}
+                        >
+                          {l.label}
+                          {active && <Check className="h-4 w-4" />}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </motion.ul>
+              )}
+            </AnimatePresence>
+          </div>
+
           <a
             href="#kontakt"
             className="rounded-xl bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-500 px-4 py-2 text-sm font-semibold text-night-950 shadow-md transition-transform hover:-translate-y-0.5"
