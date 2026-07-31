@@ -1,13 +1,11 @@
-"use client";
+﻿"use client";
 
-import { motion, useInView, useReducedMotion } from "framer-motion";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useLayoutEffect, useState } from "react";
 
-/* useLayoutEffect warnt beim Server-Rendering — auf dem Server nichts tun */
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-/* Scroll-Reveal: animiert einmal beim Eintritt, reduced-motion zeigt sofort den Endzustand */
 export function Reveal({
   children,
   delay = 0,
@@ -51,7 +49,6 @@ export function SectionLabel({
   );
 }
 
-/* Zähler: zählt einmal hoch, sobald er im Sichtfeld ist */
 export function Counter({
   value,
   prefix = "",
@@ -65,21 +62,15 @@ export function Counter({
   locale: string;
   duration?: number;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduce = useReducedMotion();
 
-  /* Der Endwert steht bereits im server-gerenderten HTML — sonst lesen
-     Crawler und Textextraktoren eine 0 statt der echten Zahl. */
   const [display, setDisplay] = useState(value);
 
-  /* Erst auf dem Client, vor dem ersten Paint, auf den Startwert zurücksetzen */
   useIsomorphicLayoutEffect(() => {
     if (!reduce) setDisplay(0);
   }, [reduce]);
 
   useEffect(() => {
-    if (!inView) return;
     if (reduce) {
       setDisplay(value);
       return;
@@ -94,13 +85,13 @@ export function Counter({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, value, duration, reduce]);
+  }, [value, duration, reduce]);
 
   const formatted =
     value >= 10000 ? display.toLocaleString(locale) : String(display);
 
   return (
-    <span ref={ref}>
+    <span>
       {prefix}
       {formatted}
       {suffix}
